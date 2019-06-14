@@ -81,7 +81,7 @@ resource "azurestack_network_interface" "ops_manager_nic" {
 
 resource "azurestack_virtual_machine" "ops_manager_vm" {
   name                          = "${var.env_name}-ops-manager-vm"
-  depends_on                    = ["azurestack_network_interface.ops_manager_nic"]
+  depends_on                    = ["azurestack_network_interface.ops_manager_nic", "azurestack_storage_blob.ops_manager_image"]
   location                      = "${var.location}"
   resource_group_name           = "${var.resource_group_name}"
   network_interface_ids         = ["${azurestack_network_interface.ops_manager_nic.id}"]
