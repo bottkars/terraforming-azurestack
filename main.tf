@@ -6,13 +6,13 @@ provider "azurestack" {
 # Create a resource group
 resource "azurestack_resource_group" "testrg" {
   name     = "rg1"
-  location = "local"
+  location = "${var.location}"
 }
 
 resource "azurestack_storage_account" "testsa" {
   name                     = "storageaccountname"
   resource_group_name      = "${azurestack_resource_group.testrg.name}"
-  location                 = "local"
+  location                 = "${var.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
