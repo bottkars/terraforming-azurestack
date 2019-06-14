@@ -72,7 +72,7 @@ variable "ssl_ca_private_key" {
   default     = ""
 }
 
-variable "ops_manager_image_uri" {
+variable "ops_manager_image_source" {
   type        = "string"
   description = "Ops Manager image on Azure. Ops Manager VM will be skipped if this is empty"
 }
@@ -83,7 +83,7 @@ variable "ops_manager_private_ip" {
   default     = "10.0.8.4"
 }
 
-variable "optional_ops_manager_image_uri" {
+variable "optional_ops_manager_image_source" {
   default = ""
 }
 

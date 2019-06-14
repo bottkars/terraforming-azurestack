@@ -26,7 +26,7 @@ resource "azurestack_storage_blob" "ops_manager_image" {
   resource_group_name    = "${var.resource_group_name}"
   storage_account_name   = "${azurestack_storage_account.ops_manager_storage_account.name}"
   storage_container_name = "${azurestack_storage_container.ops_manager_storage_container.name}"
-  source_uri             = "${var.ops_manager_image_uri}"
+  source             = "${var.ops_manager_image_source}"
   count                  = "${local.ops_man_vm}"
   type                   = "page"
 }
