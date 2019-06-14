@@ -1,6 +1,6 @@
 provider "azurestack" {
   # NOTE: we recommend pinning the version of the Provider which should be used in the Provider block
-  version = "0.7.0"
+  version = "0.6.0"
 }
 
 # Create a resource group
