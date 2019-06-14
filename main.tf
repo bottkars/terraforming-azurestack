@@ -24,7 +24,7 @@ resource "azurestack_storage_account" "testsa" {
 resource "azurestack_storage_container" "test" {
   name                  = "vhds"
   resource_group_name   = "${azurestack_resource_group.test.name}"
-  storage_account_name  = "${azurestack_storage_account.test.name}"
+  storage_account_name  = "${azurestack_storage_account.testsa.name}"
   container_access_type = "private"
 }
 
@@ -32,7 +32,7 @@ resource "azurestack_storage_blob" "testsb" {
   name = "sample.vhd"
 
   resource_group_name    = "${azurestack_resource_group.test.name}"
-  storage_account_name   = "${azurestack_storage_account.test.name}"
+  storage_account_name   = "${azurestack_storage_account.testsa.name}"
   storage_container_name = "${azurestack_storage_container.test.name}"
   source_uri = "https://opsmanagerimage.blob.westus.stackpoc.com/images/ops-manager-2.5.2-build.172.vhd"  
   type = "page"
