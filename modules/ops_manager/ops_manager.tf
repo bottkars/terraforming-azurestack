@@ -96,7 +96,7 @@ resource "azurestack_virtual_machine" "ops_manager_vm" {
   
   storage_os_disk {
     name          = "opsman-disk"
-    vhd_uri       = "${azurestack_storage_blob.ops_manager_image.uri}"
+    vhd_uri       = "${azurestack_storage_blob.ops_manager_image.url}"
     caching       = "ReadWrite"
     os_type       = "linux"
     create_option = "FromImage"
@@ -158,7 +158,7 @@ resource "azurestack_virtual_machine" "optional_ops_manager_vm" {
   delete_os_disk_on_termination = "true"
   storage_os_disk {
     name          = "opsman-disk.vhd"
-    vhd_uri       = "${azurestack_storage_blob.optional_ops_manager_image.uri}"
+    vhd_uri       = "${azurestack_storage_blob.optional_ops_manager_image.url}"
     caching       = "ReadWrite"
     os_type       = "linux"
     create_option = "FromImage"
