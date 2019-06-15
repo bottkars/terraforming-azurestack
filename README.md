@@ -10,9 +10,12 @@ It uses *unmanaged disks* as the terraform provider for AzureStack does not supp
 
 - clone the repo
 - download terraform < 0.12
+
+
 To get started, set the Following Environment Variables:
 
 ### Windows:
+Terraform Enfironment
 
 ```Powershell
 $ENV:ARM_ENDPOINT="https://management.local.azurestack.external"
@@ -23,8 +26,7 @@ $ENV:ARM_TENANT_ID       = <your tenant id >
 $ENV:ARM_LOCATION        = <your azure region>
 ```
 
-set the following terraform Variables:
-if using the same subscription / tenant / client for Opsman Director, set ARM_xx = TF_VAR_xx, otherwise specify changed values
+Terraform Deployment Variables
 ```Powershell
 $env:TF_VAR_subscription_id = $ENV:ARM_SUBSCRIPTION_ID
 $env:TF_VAR_client_id      = $ENV:ARM_CLIENT_ID
@@ -34,7 +36,9 @@ $env:TF_VAR_location       = $ENV:ARM_LOCATION
 $env:TF_VAR_ops_manager_image_uri      = <url to ops manager image on Azure or local Stack"
 ````
 
-### linux osx
+### linux/osx
+
+Tearraform Environment
 
 ```bash
 export ARM_ENDPOINT="https://management.local.azurestack.external"
@@ -45,8 +49,7 @@ export ARM_TENANT_ID       = <your tenant id >
 export ARM_LOCATION        = <your azure region>
 ```
 
-set the following terraform Variables:
-if using the same subscription / tenant / client for Opsman Director, set ARM_xx = TF_VAR_xx, otherwise specify changed values
+Terraform Deployment Variables
 
 ```bash
 export TF_VAR_subscription_id = ${ARM_SUBSCRIPTION_ID}
@@ -58,8 +61,10 @@ export TF_VAR_ops_manager_image_uri      = <url to ops manager image on Azure or
 ```
 
 
-create a terraform.tfvars in terraforming-pas with the following content:
+create a terraform.tfvars in terraforming-pas with the following content: 
+(or use additional environemnt variables)
 
+[example](./terraform.tfvars.example)
 ```
 env_name              = "banana"
 dns_suffix            = "westus.stackpoc.com"
