@@ -96,7 +96,8 @@ resource "azurestack_virtual_machine" "ops_manager_vm" {
   
   storage_os_disk {
     name          = "opsman-disk.vhd"
-    vhd_uri       = "${azurestack_storage_blob.ops_manager_image.url}"
+    image_uri     = "${azurestack_storage_account.ops_manager_storage_account}/vhds/osdisk.vhd"
+    vhd_uri     = "${var.source_img_uri}"
     caching       = "ReadWrite"
     os_type       = "linux"
     create_option = "FromImage"
