@@ -26,12 +26,16 @@ resource "azurestack_storage_blob" "ops_manager_image" {
   resource_group_name    = "${var.resource_group_name}"
   storage_account_name   = "${azurestack_storage_account.ops_manager_storage_account.name}"
   storage_container_name = "${azurestack_storage_container.ops_manager_storage_container.name}"
-  source_uri             = "${var.ops_manager_image_source}"
-  count                  = "${local.ops_man_vm}"
-  type                   = "page"
+  source_uri             = "${var.ops_manager_image_uri}"
 }
 
-
+resource "azurestack_storage_blob" "optional_ops_manager_image" {
+  name                   = "optional_opsman.vhd"
+  resource_group_name    = "${var.resource_group_name}"
+  storage_account_name   = "${azurestack_storage_account.ops_manager_storage_account.name}"
+  storage_container_name = "${azurestack_storage_container.ops_manager_storage_container.name}"
+  source_uri             = "${var.optional_ops_manager_image_uri}"
+}
 
 # ==================== DNS
 
@@ -89,12 +93,14 @@ resource "azurestack_virtual_machine" "ops_manager_vm" {
   count                         = "${local.ops_man_vm}"
 
 
-    
+  
   storage_os_disk {
     name          = "opsman-disk"
     vhd_uri       = "${azurestack_storage_account.ops_manager_storage_account.primary_blob_endpoint}${azurestack_storage_container.ops_manager_storage_container.name}/opsman.vhd"
     caching       = "ReadWrite"
+    os_type       = "linux"
     create_option = "FromImage"
+    disk_size_gb  = "150"
   }
 
 

@@ -26,11 +26,11 @@ module "ops_manager" {
   env_name = "${var.env_name}"
   env_short_name = "${var.env_short_name}"
   location = "${var.location}"
-  ops_manager_image_source  = "${var.ops_manager_image_source}"
+  ops_manager_image_uri  = "${var.ops_manager_image_uri}"
   ops_manager_vm_size    = "${var.ops_manager_vm_size}"
   ops_manager_private_ip = "${var.ops_manager_private_ip}"
 
-  optional_ops_manager_image_source = "${var.optional_ops_manager_image_source}"
+  optional_ops_manager_image_uri = "${var.optional_ops_manager_image_uri}"
 
   resource_group_name = "${module.infra.resource_group_name}"
   dns_zone_name       = "${module.infra.dns_zone_name}"
