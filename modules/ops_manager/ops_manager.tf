@@ -22,7 +22,7 @@ resource "azurestack_storage_container" "ops_manager_storage_container" {
 }
 
 resource "azurestack_storage_blob" "ops_manager_image" {
-  name                   = "opsman.vhd"
+  name                   = "opsman-disk.vhd"
   resource_group_name    = "${var.resource_group_name}"
   storage_account_name   = "${azurestack_storage_account.ops_manager_storage_account.name}"
   storage_container_name = "${azurestack_storage_container.ops_manager_storage_container.name}"
@@ -30,7 +30,7 @@ resource "azurestack_storage_blob" "ops_manager_image" {
 }
 
 resource "azurestack_storage_blob" "optional_ops_manager_image" {
-  name                   = "optional_opsman.vhd"
+  name                   = "optional_opsman-disk.vhd"
   resource_group_name    = "${var.resource_group_name}"
   storage_account_name   = "${azurestack_storage_account.ops_manager_storage_account.name}"
   storage_container_name = "${azurestack_storage_container.ops_manager_storage_container.name}"
