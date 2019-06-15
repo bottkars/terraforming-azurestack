@@ -1,6 +1,10 @@
 provider "azurestack" {
   # NOTE: we recommend pinning the version of the Provider which should be used in the Provider block
-  version = "0.6.0"
+  version = "0.7.0"
+}
+variable "ops_manager_image_uri" {
+  type        = "string"
+  description = "Ops Manager image on Azure. Ops Manager VM will be skipped if this is empty"
 }
 
 # Create a resource group
@@ -9,32 +13,16 @@ resource "azurestack_resource_group" "test" {
   location = "${var.location}"
 }
 
-resource "azurestack_storage_account" "testsa" {
-  name                     = "storageaccountname"
-  resource_group_name      = "${azurestack_resource_group.test.name}"
-  location                 = "${var.location}"
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
 
-  tags = {
-    environment = "staging"
+resource "azurestack_image" "test" {
+  name                = "acctest"
+  location            = "local"
+  resource_group_name = "${azurestack_resource_group.test.name}"
+
+  os_disk {
+    os_type  = "Linux"
+    os_state = "Generalized"
+    blob_uri = "{var.ops_manager_image_uri}"
+    size_gb  = 30
   }
-}
-
-resource "azurestack_storage_container" "test" {
-  name                  = "vhds"
-  resource_group_name   = "${azurestack_resource_group.test.name}"
-  storage_account_name  = "${azurestack_storage_account.testsa.name}"
-  container_access_type = "private"
-}
-
-resource "azurestack_storage_blob" "testsb" {
-  name = "sample.vhd"
-
-  resource_group_name    = "${azurestack_resource_group.test.name}"
-  storage_account_name   = "${azurestack_storage_account.testsa.name}"
-  storage_container_name = "${azurestack_storage_container.test.name}"
-  source_uri = "https://opsmanagerimage.blob.westus.stackpoc.com/images/ops-manager-2.5.2-build.172.vhd"  
-  type = "page"
-  
 }

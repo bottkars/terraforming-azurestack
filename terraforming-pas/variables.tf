@@ -74,7 +74,7 @@ variable "ssl_ca_private_key" {
 
 variable "ops_manager_image_uri" {
   type        = "string"
-  description = "Ops Manager image on Azure. Ops Manager VM will be skipped if this is empty"
+  description = "Ops Manager image on Azure/Stack. Ops Manager VM will be skipped if this is empty"
 }
 
 variable "ops_manager_private_ip" {
