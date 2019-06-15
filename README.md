@@ -57,7 +57,7 @@ export TF_VAR_client_id      = ${ARM_CLIENT_ID}
 export TF_VAR_client_secret  = ${ARM_CLIENT_SECRET}
 export TF_VAR_tenant_id      = ${ARM_TENANT_ID}
 export TF_VAR_location       = ${ARM_LOCATION}
-export TF_VAR_ops_manager_image_uri      = <url to ops manager image on Azure or AzureStack>
+export TF_VAR_ops_manager_image_uri = <url to ops manager image on Azure or AzureStack>
 ```
 
 
