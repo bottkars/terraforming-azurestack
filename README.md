@@ -60,5 +60,16 @@ export TF_VAR_ops_manager_image_uri      = <url to ops manager image on Azure or
 
 create a terraform.tfvars in terraforming-pas with the following content:
 
+```
+env_name              = "banana"
+dns_suffix            = "westus.stackpoc.com"
+env_short_name        = "fruit"
+```
+run the following:
 
+```bash
 cd to terraforming-pas
+terraform init
+terraform apply
+```
+

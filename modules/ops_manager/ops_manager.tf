@@ -20,7 +20,13 @@ resource "azurestack_storage_container" "ops_manager_storage_container" {
   storage_account_name  = "${azurestack_storage_account.ops_manager_storage_account.name}"
   container_access_type = "private"
 }
-
+resource "azurestack_storage_container" "ops_manager_vhd_container" {
+  name                  = "vhds"
+  depends_on            = ["azurestack_storage_account.ops_manager_storage_account"]
+  resource_group_name   = "${var.resource_group_name}"
+  storage_account_name  = "${azurestack_storage_account.ops_manager_storage_account.name}"
+  container_access_type = "private"
+}
 resource "azurestack_storage_blob" "ops_manager_image" {
   name                   = "opsman.vhd"
   resource_group_name    = "${var.resource_group_name}"
@@ -96,7 +102,7 @@ resource "azurestack_virtual_machine" "ops_manager_vm" {
   
   storage_os_disk {
     name          = "osdisk.vhd"
-    vhd_uri       = "${azurestack_storage_account.ops_manager_storage_account.primary_blob_endpoint}/vhds/opsmandisk.vhd"
+    vhd_uri       = "${azurestack_storage_account.ops_manager_storage_account.primary_blob_endpoint}/vhds/osdisk.vhd"
     image_uri     = "${azurestack_storage_blob.ops_manager_image.url}"
     caching       = "ReadWrite"
     os_type       = "linux"
