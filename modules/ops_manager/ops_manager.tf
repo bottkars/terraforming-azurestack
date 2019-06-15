@@ -4,7 +4,7 @@ resource "azurestack_storage_account" "ops_manager_storage_account" {
 name                     = "${var.env_short_name}opsmanagerstorage"
   resource_group_name      = "${var.resource_group_name}"
   location                 = "${var.location}"
-  account_tier             = "Premium"
+  account_tier             = "Standard"
   account_replication_type = "LRS"
 
   tags = {
@@ -96,7 +96,7 @@ resource "azurestack_virtual_machine" "ops_manager_vm" {
   
   storage_os_disk {
     name          = "opsman-disk"
-    vhd_uri       = "${azurestack_storage_account.ops_manager_storage_account.primary_blob_endpoint}${azurestack_storage_container.ops_manager_storage_container.name}/opsman.vhd"
+    vhd_uri       = "${azurestack_storage_account.ops_manager_storage_account.primary_blob_endpoint}${azurestack_storage_container.ops_manager_storage_container.name}/opsman-disk.vhd"
     caching       = "ReadWrite"
     os_type       = "linux"
     create_option = "FromImage"
@@ -149,7 +149,7 @@ resource "azurestack_network_interface" "optional_ops_manager_nic" {
 
 resource "azurestack_virtual_machine" "optional_ops_manager_vm" {
   name                  = "${var.env_name}-optional-ops-manager-vm"
-  depends_on            = ["azurestack_network_interface.optional_ops_manager_nic"]
+  depends_on            = ["azurestack_network_interface.optional_ops_manager_nic","azurestack_storage_blob.optional_ops_manager_image"]
   location              = "${var.location}"
   resource_group_name   = "${var.resource_group_name}"
   network_interface_ids = ["${azurestack_network_interface.optional_ops_manager_nic.id}"]
