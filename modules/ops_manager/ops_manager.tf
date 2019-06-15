@@ -96,8 +96,7 @@ resource "azurestack_virtual_machine" "ops_manager_vm" {
   
   storage_os_disk {
     name          = "osdisk.vhd"
-    vhd_uri ="${azurestack_storage_account.ops_manager_storage_account.primary_blob_endpoint}${azurestack_storage_container.ops_manager_storage_container.name}/opsmandisk.vhd"
-  # vhd_uri     = "${azurestack_storage_account.ops_manager_storage_account.url}/vhds/osdisk.vhd"
+    vhd_uri       = "${azurestack_storage_account.ops_manager_storage_account.primary_blob_endpoint}/vhds/opsmandisk.vhd"
     image_uri     = "${azurestack_storage_blob.ops_manager_image.url}"
     caching       = "ReadWrite"
     os_type       = "linux"
