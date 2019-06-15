@@ -10,6 +10,7 @@ It uses *unmanaged disks* as the terraform provider for AzureStack does not supp
 
 - clone the repo
 - download terraform < 0.12
+- azurestack <= 1904 ( 1905 is broken with terraform <=0.7.0)
 
 
 To get started, set the Following Environment Variables:
