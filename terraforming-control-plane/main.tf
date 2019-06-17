@@ -22,7 +22,7 @@ module "ops_manager" {
 
   env_name = "${var.env_name}"
   location = "${var.location}"
-
+  env_short_name      = "${var.env_short_name}"
   ops_manager_image_uri  = "${var.ops_manager_image_uri}"
   ops_manager_vm_size    = "${var.ops_manager_vm_size}"
   ops_manager_private_ip = "${var.ops_manager_private_ip}"
@@ -44,7 +44,5 @@ module "control_plane" {
   dns_zone_name       = "${module.infra.dns_zone_name}"
   cidr                = "${var.plane_cidr}"
   network_name        = "${module.infra.network_name}"
-
-
   location    = "${var.location}"
 }
