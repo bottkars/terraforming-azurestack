@@ -1,5 +1,5 @@
-resource "azurestack_public_ip" "web-lb-public-ip" {
-  name                    = "web-lb-public-ip"
+resource "azurestack_public_ip" "plane" {
+  name                    = "plane"
   location                = "${var.location}"
   resource_group_name     = "${var.resource_group_name}"
   public_ip_address_allocation       = "Static"
@@ -13,7 +13,7 @@ resource "azurestack_lb" "web" {
 
   frontend_ip_configuration = {
     name                 = "frontendip"
-    public_ip_address_id = "${azurestack_public_ip.web-lb-public-ip.id}"
+    public_ip_address_id = "${azurestack_public_ip.plane.id}"
   }
 }
 
