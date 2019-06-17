@@ -17,24 +17,24 @@ resource "azurestack_lb" "plane" {
   }
 }
 
-resource "azurestack_lb_backend_address_pool" "web-backend-pool" {
-  name                = "web-backend-pool"
+resource "azurestack_lb_backend_address_pool" "plane-backend-pool" {
+  name                = "plane-backend-pool"
   resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.web.id}"
+  loadbalancer_id     = "${azurestack_lb.plane.id}"
 }
 
-resource "azurestack_lb_probe" "web-https-probe" {
-  name                = "web-https-probe"
+resource "azurestack_lb_probe" "plane-https-probe" {
+  name                = "plane-https-probe"
   resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.web.id}"
+  loadbalancer_id     = "${azurestack_lb.plane.id}"
   protocol            = "TCP"
   port                = 443
 }
 
-resource "azurestack_lb_rule" "web-https-rule" {
-  name                = "web-https-rule"
+resource "azurestack_lb_rule" "plane-https-rule" {
+  name                = "plane-https-rule"
   resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.web.id}"
+  loadbalancer_id     = "${azurestack_lb.plane.id}"
 
   frontend_ip_configuration_name = "frontendip"
   protocol                       = "TCP"
@@ -42,22 +42,22 @@ resource "azurestack_lb_rule" "web-https-rule" {
   backend_port                   = 443
   idle_timeout_in_minutes        = 30
 
-  backend_address_pool_id = "${azurestack_lb_backend_address_pool.web-backend-pool.id}"
-  probe_id                = "${azurestack_lb_probe.web-https-probe.id}"
+  backend_address_pool_id = "${azurestack_lb_backend_address_pool.plane-backend-pool.id}"
+  probe_id                = "${azurestack_lb_probe.plane-https-probe.id}"
 }
 
-resource "azurestack_lb_probe" "web-http-probe" {
-  name                = "web-http-probe"
+resource "azurestack_lb_probe" "plane-http-probe" {
+  name                = "plane-http-probe"
   resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.web.id}"
+  loadbalancer_id     = "${azurestack_lb.plane.id}"
   protocol            = "TCP"
   port                = 80
 }
 
-resource "azurestack_lb_rule" "web-http-rule" {
-  name                = "web-http-rule"
+resource "azurestack_lb_rule" "plane-http-rule" {
+  name                = "plane-http-rule"
   resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.web.id}"
+  loadbalancer_id     = "${azurestack_lb.plane.id}"
 
   frontend_ip_configuration_name = "frontendip"
   protocol                       = "TCP"
@@ -65,19 +65,19 @@ resource "azurestack_lb_rule" "web-http-rule" {
   backend_port                   = 80
   idle_timeout_in_minutes        = 30
 
-  backend_address_pool_id = "${azurestack_lb_backend_address_pool.web-backend-pool.id}"
-  probe_id                = "${azurestack_lb_probe.web-http-probe.id}"
+  backend_address_pool_id = "${azurestack_lb_backend_address_pool.plane-backend-pool.id}"
+  probe_id                = "${azurestack_lb_probe.plane-http-probe.id}"
 }
 
-resource "azurestack_lb_rule" "web-ntp" {
-  name                = "web-ntp-rule"
+resource "azurestack_lb_rule" "plane-ntp" {
+  name                = "plane-ntp-rule"
   resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.web.id}"
+  loadbalancer_id     = "${azurestack_lb.plane.id}"
 
   frontend_ip_configuration_name = "frontendip"
   protocol                       = "UDP"
   frontend_port                  = "123"
   backend_port                   = "123"
 
-  backend_address_pool_id = "${azurestack_lb_backend_address_pool.web-backend-pool.id}"
+  backend_address_pool_id = "${azurestack_lb_backend_address_pool.plane-backend-pool.id}"
 }
