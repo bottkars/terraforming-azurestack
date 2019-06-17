@@ -12,6 +12,10 @@ variable "dns_suffix" {}
 
 variable "env_name" {}
 
+variable "env_short_name" {
+  description = "Used for creating storage accounts. Must be a-z only, no longer than 10 characters"
+}
+
 variable "location" {}
 
 # Optional variables (the following have default values):
