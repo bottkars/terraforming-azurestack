@@ -23,61 +23,25 @@ resource "azurestack_lb_backend_address_pool" "uaa-backend-pool" {
   loadbalancer_id     = "${azurestack_lb.uaa.id}"
 }
 
-resource "azurestack_lb_probe" "uaa-https-probe" {
-  name                = "uaa-https-probe"
+resource "azurestack_lb_probe" "uaa-8443-probe" {
+  name                = "uaa-8443-probe"
   resource_group_name = "${var.resource_group_name}"
   loadbalancer_id     = "${azurestack_lb.uaa.id}"
   protocol            = "TCP"
-  port                = 443
+  port                = 8443
 }
 
-resource "azurestack_lb_rule" "uaa-https-rule" {
-  name                = "uaa-https-rule"
+resource "azurestack_lb_rule" "uaa-8443-rule" {
+  name                = "uaa-8443-rule"
   resource_group_name = "${var.resource_group_name}"
   loadbalancer_id     = "${azurestack_lb.uaa.id}"
 
   frontend_ip_configuration_name = "frontendip"
   protocol                       = "TCP"
-  frontend_port                  = 443
-  backend_port                   = 443
+  frontend_port                  = 8443
+  backend_port                   = 8443
   idle_timeout_in_minutes        = 30
 
   backend_address_pool_id = "${azurestack_lb_backend_address_pool.uaa-backend-pool.id}"
-  probe_id                = "${azurestack_lb_probe.uaa-https-probe.id}"
-}
-
-resource "azurestack_lb_probe" "uaa-http-probe" {
-  name                = "uaa-http-probe"
-  resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.uaa.id}"
-  protocol            = "TCP"
-  port                = 80
-}
-
-resource "azurestack_lb_rule" "uaa-http-rule" {
-  name                = "uaa-http-rule"
-  resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.uaa.id}"
-
-  frontend_ip_configuration_name = "frontendip"
-  protocol                       = "TCP"
-  frontend_port                  = 80
-  backend_port                   = 80
-  idle_timeout_in_minutes        = 30
-
-  backend_address_pool_id = "${azurestack_lb_backend_address_pool.uaa-backend-pool.id}"
-  probe_id                = "${azurestack_lb_probe.uaa-http-probe.id}"
-}
-
-resource "azurestack_lb_rule" "uaa-ntp" {
-  name                = "uaa-ntp-rule"
-  resource_group_name = "${var.resource_group_name}"
-  loadbalancer_id     = "${azurestack_lb.uaa.id}"
-
-  frontend_ip_configuration_name = "frontendip"
-  protocol                       = "UDP"
-  frontend_port                  = "123"
-  backend_port                   = "123"
-
-  backend_address_pool_id = "${azurestack_lb_backend_address_pool.uaa-backend-pool.id}"
+  probe_id                = "${azurestack_lb_probe.uaa-8443-probe.id}"
 }
