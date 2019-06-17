@@ -7,7 +7,7 @@ resource "azurestack_public_ip" "plane" {
 }
 
 resource "azurestack_lb" "plane" {
-  name                = "${var.env_name}-plane"
+  name                = "${var.env_name}-plane-lb"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
 

@@ -7,7 +7,7 @@ resource "azurestack_public_ip" "credhub" {
 }
 
 resource "azurestack_lb" "credhub" {
-  name                = "${var.env_name}-credhub"
+  name                = "${var.env_name}-credhub-lb"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
 

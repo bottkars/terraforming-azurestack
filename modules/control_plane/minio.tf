@@ -7,7 +7,7 @@ resource "azurestack_public_ip" "minio" {
 }
 
 resource "azurestack_lb" "minio" {
-  name                = "${var.env_name}-minio"
+  name                = "${var.env_name}-minio-lb"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
 
