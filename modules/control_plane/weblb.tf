@@ -6,8 +6,8 @@ resource "azurestack_public_ip" "plane" {
   idle_timeout_in_minutes = 30
 }
 
-resource "azurestack_lb" "web" {
-  name                = "${var.env_name}-web-lb"
+resource "azurestack_lb" "plane" {
+  name                = "${var.env_name}-plane"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
 
