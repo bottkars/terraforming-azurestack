@@ -5,7 +5,7 @@ provider "azurestack" {
   tenant_id       = "${var.tenant_id}"
   environment     = "${var.cloud_name}"
 
-  version = "~> 1.22"
+  version = "=0.7.0"
 }
 
 terraform {
