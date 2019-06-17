@@ -19,7 +19,7 @@ resource "azurestack_public_ip" "plane" {
   resource_group_name = "${var.resource_group_name}"
   name                = "${local.name_prefix}-ip"
   location            = "${var.location}"
-  allocation_method   = "Static"
+  public_ip_address_allocation   = "Static"
 }
 
 resource "azurestack_lb" "plane" {
@@ -84,7 +84,7 @@ resource "azurestack_network_security_rule" "plane" {
   access                     = "Allow"
   protocol                   = "Tcp"
   source_port_range          = "*"
-  destination_port_ranges    = "${local.web_ports}"
+  destination_port_range    = "${local.web_ports}"
   source_address_prefix      = "*"
   destination_address_prefix = "*"
 }
