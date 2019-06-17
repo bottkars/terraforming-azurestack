@@ -43,7 +43,7 @@ resource "azurestack_lb_rule" "minio-9000-rule" {
   idle_timeout_in_minutes        = 30
 
   backend_address_pool_id = "${azurestack_lb_backend_address_pool.minio-backend-pool.id}"
-  probe_id                = "${azurestack_lb_probe.minio-8844-probe.id}"
+  probe_id                = "${azurestack_lb_probe.minio-9000-probe.id}"
 }
 
 
