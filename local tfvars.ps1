@@ -14,7 +14,7 @@ $env:TF_VAR_client_id      = $env_vars.client_id
 $env:TF_VAR_client_secret  = $env_vars.client_secret
 $env:TF_VAR_tenant_id      = (Get-AzureRmSubscription).TenantId
 $env:TF_VAR_location       = "local"
-$env:TF_VAR_ops_manager_image_uri      = "https://opsmanagerimage.blob.local.azurestack.external/images/ops-manager-2.5.4-build.189.vhd"
+$env:TF_VAR_ops_manager_image_uri      = "https://opsmanagerimage.blob.local.azurestack.external/images/ops-manager-2.6.3-build.163.vhd"
 
 
 
